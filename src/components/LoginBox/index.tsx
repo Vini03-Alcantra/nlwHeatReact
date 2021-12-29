@@ -1,26 +1,18 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { VscGithubInverted } from "react-icons/vsc"
+import { AuthContext } from "../../contexts/auth"
+import { api } from "../../services/api"
 import styles from './style.module.scss'
 
 export function LoginBox() {
-    const signinUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=f78b173c3922b4390349`
+    const {signInUrl, user} = useContext(AuthContext)
 
-    useEffect(() => {
-        const url = window.location.href;
-        const hasGithubCode = url.includes('?code=')
-
-        if(hasGithubCode){
-            const [urlWithoutCode, githubCode] = url.split('?code=')
-
-            console.log({urlWithoutCode, githubCode})
-            window.history.pushState({}, '', urlWithoutCode)
-        }
-    }, [])
+    console.log(user)
 
     return (
         <div className={styles.loginBoxWrapper}>
             <strong>Entre e compartilhe sua mensagem</strong>
-            <a href={signinUrl} className={styles.signInWithGithub}>
+            <a href={signInUrl} className={styles.signInWithGithub}>
                 <VscGithubInverted size="24" />
                 Entrar com github
             </a>
