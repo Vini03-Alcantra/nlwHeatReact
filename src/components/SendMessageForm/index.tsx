@@ -1,15 +1,15 @@
 import { useContext } from "react"
-import { VscGithubInverted } from "react-icons/vsc"
+import { VscGithubInverted, VscSignIn, VscSignOut } from "react-icons/vsc"
 import { AuthContext } from "../../contexts/auth"
 import styles from "./styles.module.scss"
 
 export function SendMessageForm(){
-    const {user} = useContext(AuthContext)
+    const {user, signOut} = useContext(AuthContext)
 
     return (
         <div className={styles.sendMessageFromWrapper}>
-            <button className={styles.signOutButton}>
-
+            <button onClick={signOut} className={styles.signOutButton}>
+                <VscSignOut size= "32" />
             </button>
 
             <header className={styles.userInformation}>
